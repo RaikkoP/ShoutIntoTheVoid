@@ -12,6 +12,9 @@ app.get("/", (req, res) => {
     res.send("Hello, World!");
   });
 
+import getAllRoutes from "./routes/getall";
+app.get("/test", getAllRoutes);
+
   app.listen(5173, () => {
     console.log("Listening on port 5173");
   });
