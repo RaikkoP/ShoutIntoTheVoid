@@ -23,7 +23,6 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                 // Table just created, creating some rows
                 const firstInsert = 'INSERT INTO messages (body, likes, date) VALUES (?,?,?)'
                 db.run(firstInsert, ["Hello world!", 0, sqlite3.datetime()])
-                db.run(firstInsert, ["Greetings globe!", 0, sqlite3.datetime()])
             }
         });  
     }

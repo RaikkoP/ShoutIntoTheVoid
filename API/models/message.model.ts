@@ -1,7 +1,7 @@
 import db from "../utilities/database";
 
 interface MessageInterface {
-    message: string;
+    body: string;
     likes: number;
     date: string;
     id: number;
@@ -12,14 +12,29 @@ interface ErrorInterface {
 }
 
 class Message {
-    message: string;
+    body: string;
     likes: number;
     date: string;
+    id: number;
 
-    constructor({message, likes, date}: MessageInterface) {
-        this.message = message;
+    constructor({body, likes, date, id}: MessageInterface) {
+        this.body = body;
         this.likes = likes;
         this.date = date;
+        this.id = id;
+    }
+
+    static getAll(message: MessageInterface, result: (error: ErrorInterface | string | null, data: MessageInterface | null) => void) {
+        db.all('SELECT * FROM message', [], async(err, res) => {
+            if (err) {
+                result(err, null);
+                return;
+            }
+            message = res;
+            console.log("messages: ", message);
+            result(null, message);
+            }
+        )
     }
 }
 
