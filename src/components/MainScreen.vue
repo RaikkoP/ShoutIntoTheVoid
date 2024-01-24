@@ -1,4 +1,56 @@
 <script setup lang="ts">
+import { stringify } from 'querystring';
+
+</script>
+
+<script lang="ts">
+    import axios from 'axios'
+
+    interface Shout {
+        body: string;
+        likes?: number;
+        date?: string;
+        id?: number;
+    }
+
+    interface newShout {
+        body: string;
+    }
+
+    export default {
+        data() {
+            return {
+                shoutData: [] as Shout[],
+                newShoutData: {
+                    body:''
+                } as newShout
+            }
+        },
+
+        methods: {
+            submitShout() {
+                axios.post('http://localhost:5173/newshout', this.newShoutData)
+                    .then(function (response) {
+                    console.log(response)
+                })
+            },
+
+            getShouts() {
+                axios.get('http://localhost:5173/random')
+                    .then(response => {
+                        if (Array.isArray(response.data)) {
+                            console.log(response)
+                            this.shoutData = response.data
+                        } else {
+                            console.error('Expected an array but received:', response.data);
+                            this.shoutData = []
+                        }
+                    })
+            }
+        }
+
+        
+    }
 </script>
 
 <template>
@@ -12,13 +64,12 @@
                     <div class="history-container">
     
                     </div>
-                    <form class="voidForm">
+                    <form @submit="shoutData" class="voidForm">
                         <div class="terminalTag">
                             <p>>shout:</p>
-                            <input name="shout" />
+                            <input name="shout" v-model="newShoutData"/>
                         </div>
-                        
-                       <button>Shout</button>
+                       <button type="submit">Shout</button>
                    </form>
                 </div>
             </div>
@@ -35,13 +86,12 @@
                             <p><span style="text-decoration:underline">Research:</span> Voices being repeated back by entity</p>
                         </div>
                     </div>
-                    <div class="cloud-button">
-                        <button>Get Response</button>
+                    <div>
+                        
                     </div>
-                </div>
-                <div class="responseButtons">
-                    <button class="like">Like</button>
-                    <button class="dislike">Dislike</button>
+                    <div class="cloud-button">
+                        <button @click="getShouts">Get Response</button>
+                    </div>
                 </div>
             </div>
         </div>

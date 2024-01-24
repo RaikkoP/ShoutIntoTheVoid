@@ -37,18 +37,22 @@ class Message {
         )
     }
 
-    static getRandom(message: MessageInterface, result: (error: ErrorInterface | string | null, data: MessageInterface | null) => void) {
+    static getRandom(message: MessageInterface, result: (error: ErrorInterface | string | null, data: MessageInterface[] | null) => void) {
         db.all('SELECT * FROM messages', [], async (err: Error, res: MessageInterface[]) => {
-            if (err) {
-                result(err, null);
-                return;
-            }
-            let rand = Math.floor(Math.random() * res.length)
-            const randomMessage = res[rand];
-            console.log("random message: ", randomMessage);
-            result(null, randomMessage);
-        }
-        )
+                if (err) {
+                    result(err, null);
+                    return;
+                }
+                
+                let randomMessages = [];
+                for (let i = 0; i < 3; i++) {
+                        let rand = Math.floor(Math.random() * res.length)
+                        const randomMessage = res[rand];
+                        console.log("random message: ", randomMessage);
+                        randomMessages.push(randomMessage);
+                }
+                result(null, randomMessages);
+            })
     }
 
     static newMessage(message: MessageInterface, result: (error: ErrorInterface | string | null, data: MessageInterface | null) => void) {
