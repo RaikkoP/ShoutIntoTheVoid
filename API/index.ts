@@ -1,20 +1,21 @@
-import express, { Application } from "express";
+import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 
-const app: Application = express();
+const app = express();
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/", (req, res) => {
-    console.log("Connected");
-    res.send("Hello, World!");
-  });
+  console.log("Connected");
+  res.send("Hello, World!");
+});
 
-import getAllRoutes from "./routes/getall";
-app.get("/test", getAllRoutes);
+import getAllRoutes from "./routes/getPost";
+import newMessageRoutes from "./routes/newPost";
+app.use("/get", getAllRoutes);
+app.use("/create", newMessageRoutes)
 
-  app.listen(5173, () => {
-    console.log("Listening on port 5173");
-  });
+app.listen(5173, () => {
+  console.log("Listening on port 5173");
+});
