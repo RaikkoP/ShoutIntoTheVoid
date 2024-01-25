@@ -17,7 +17,8 @@ const messageController = {
                     message: "Error getting messages"
                 });
             } else {
-                console.log(data);
+                res.json(data);
+                return;
             }
         })
     },
@@ -35,7 +36,8 @@ const messageController = {
                     message: "Error getting messages"
                 });
             } else {
-                console.log(data);
+                res.json(data);
+                return;
             }
         })
     }

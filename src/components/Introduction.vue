@@ -12,12 +12,6 @@
             }
         },
         methods: {
-            changeStory: function() {
-                this.localShowStory = !this.showStory;
-                this.localIntroductionShown = !this.introductionShown;
-                this.$emit('update:introductionShown', this.localIntroductionShown)
-                this.$emit('update:showStory', this.localShowStory)
-            },
             changeVoid: function() {
                 this.localShowVoid = !this.showVoid;
                 this.localIntroductionShown = !this.introductionShown;
@@ -37,15 +31,13 @@
                 <p>
                     "Shout To The Void" is an application that allows you to send an annonymous message into the void
                     that can be displayed
-                    to other users who try to communicate with the Void. Messages are shown as Word Clouds. The clouds
-                    can be upvoted to be shown more often than others. <br>
+                    to other users who try to communicate with the Void.<br>
                 </p>
                 <p style="text-align: center; margin-top: 10px">This project is made using <b>Vue, TypeScript,
                     SQLite.</b>
                 </p>    
             </div>
             <div class="buttons">
-                <button type="button" @click="{showStory}">Start Story</button>
                 <button type="button" @click="changeVoid">Go To Void</button>
             </div>
         </div>

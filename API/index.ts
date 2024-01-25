@@ -16,6 +16,6 @@ import newMessageRoutes from "./routes/newPost";
 app.use("/get", getAllRoutes);
 app.use("/create", newMessageRoutes)
 
-app.listen(5173, () => {
-  console.log("Listening on port 5173");
+app.listen(3000, () => {
+  console.log("Listening on port 3000");
 });
