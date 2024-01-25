@@ -9,6 +9,12 @@ To start using ShoutIntoTheVoid follow these steps:
 ```bash
    npm install
 ```
+- Start the API.
+```bash
+   cd API
+   
+   npm start
+```
 - Run the app using Vite
 ```bash
    npm run dev
